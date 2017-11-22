@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<%= form_for(@event, url: choose_new_or_edit) do |f| %>
+  <% if @event.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= @event.errors.count %>件のエラーがあります。</h2>
+      <ul>
+        <% @event.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.label :イベントタイトル %><br>
+  <%= f.text_field :title %>
+  <br>
+  <%= f.label :イベント開催日 %><br>
+  <%= f.date_field :date %>
+  <br>
+  <%= f.label :イベント内容 %><br>
+  <%= f.text_area :content %>
+  <br>
+  <%= f.label :イベントのイメージ画像 %><br>
+  <%= photo_img(@event) %>
+  <%= f.file_field :image %>
+
+  <br>
+  <%= f.submit '投稿', class: 'btn btn-primary btn-block' %>
+
+<% end %>

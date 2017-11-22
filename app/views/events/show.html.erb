@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="wrapper">
+    <h2>イベント詳細</h2>
+    <div class="detail_screen clearfix">
+      <%=form_for(@event, url:{action_name:'participation'} ) do |f| %>
+        <div class="all_area">
+          <div class="left_area">
+            <div class="image_area">
+              <%= photo_img(@event) %>
+            </div>
+            <div class="organizer_info">
+              <h2>イベント会場の情報</h2>
+            </div>
+          </div>
+          <div class="event_content">
+            <%= @event.content %>
+          </div>
+        </div>
+        <div class="btn_area">
+          <div class="menu_btn">
+            <%= f.submit "イベントに参加する" %>
+            <%= f.submit "イベント参加者一覧" %>
+          </div>
+          <div class="back_btn">
+            <%= link_to "戻る", events_path %>
+          </div>
+        </div>
+
+      <% end %>
+    </div>
+  </div>
+</div>
