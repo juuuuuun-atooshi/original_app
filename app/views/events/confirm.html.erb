@@ -7,6 +7,8 @@
             <%= f.hidden_field :title %>
             <%= f.hidden_field :date %>
             <%= f.hidden_field :content %>
+            <%= f.hidden_field :image %>
+            <%= f.hidden_field :image_cache %>
 
             <p><%= photo_img(@event) %></p>
             <p>イベントタイトル：<%= @event.title %></p>
@@ -16,10 +18,14 @@
         <% end %>
 
         <%= form_for(@event, url: new_event_path, method:'get') do |f| %>
-        <%= f.hidden_field :title %>
-        <%= f.hidden_field :date %>
-        <%= f.hidden_field :content %>
+          <%= f.hidden_field :title %>
+          <%= f.hidden_field :date %>
+          <%= f.hidden_field :content %>
+          <%= f.hidden_field :image %>
+          <%= f.hidden_field :image_cache %>
+          <div class="confirm_area_btn">
             <%= f.submit "もどる", name:'back', class: 'btn btn-default btn-block' %>
+          </div>
         <% end %>
         <br>
     </div>

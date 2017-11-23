@@ -1,5 +1,7 @@
 class EventsController < ApplicationController
   before_action :set_event, only:[:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:index, :show]
+
 
   def index
     @events = Event.all
@@ -18,6 +20,7 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.create(events_params)
+    @event.organizer_id = current_user.id
     if @event.save
       redirect_to events_path, notice: 'イベントを投稿しました！'
     else
@@ -29,21 +32,20 @@ class EventsController < ApplicationController
   end
 
   def update
+
     unless params[:action_name].blank?
       if params[:action_name] == 'participation'
         participation
-      elsif params[:action_name] == 'test'
-        binding.pry
-        redirect_to controller: :participants, action: :create, params:{event: @event.id }
       end
-
     else
+
       if @event.update(events_params)
         redirect_to events_path, notice: 'イベント内容を変更しました！'
       else
         render 'new'
       end
     end
+
   end
 
   def destroy
@@ -57,13 +59,15 @@ class EventsController < ApplicationController
   end
 
   def participation
-    binding.pry
-    render 'events/participation'
+    redirect_to participation_participants_path(params[:id])
+  end
+
+  def search
   end
 
   private
     def events_params
-      params.require(:event).permit(:title, :date, :content, :image)
+      params.require(:event).permit(:title, :date, :content, :image, :image_cache)
     end
 
     def set_event

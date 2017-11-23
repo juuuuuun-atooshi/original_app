@@ -22,8 +22,8 @@
   <%= f.text_area :content %>
   <br>
   <%= f.label :イベントのイメージ画像 %><br>
-  <%= photo_img(@event) %>
   <%= f.file_field :image %>
+  <%= f.hidden_field :image_cache %>
 
   <br>
   <%= f.submit '投稿', class: 'btn btn-primary btn-block' %>

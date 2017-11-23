@@ -4,8 +4,9 @@ Rails.application.routes.draw do
 
   resources :events do
     post :confirm, on: :collection
-    post :participation, on: :collection
-    post :show, on: :collection
+    get :participation, on: :collection
+    patch :participation, on: :collection
+    # post :show, on: :collection
   end
 
   resources :conversations do
@@ -13,7 +14,9 @@ Rails.application.routes.draw do
   end
 
   resources :participants, only:[:create] do
-    get :create, on: :collection
+    # post :create, on: :collection
+    get :participation, on: :collection
+    patch :create, on: :collection
   end
 
   root "events#index"

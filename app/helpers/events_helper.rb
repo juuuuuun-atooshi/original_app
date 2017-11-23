@@ -10,7 +10,7 @@ module EventsHelper
 
   def photo_img(event)
     if event.image?
-      image_tag(event.image, alt: event.organizer.daihyo_name)
+      image_tag(event.image, alt:event.organizer)
     else
       return;
     end

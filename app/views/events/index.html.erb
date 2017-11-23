@@ -20,16 +20,16 @@
           <%= photo_img(event) %>
           <% if event.content.length > 500  %>
             <%= event.content.truncate(535) %>
+            <%= link_to "詳細を表示", event_path(event) %><br>
           <% else %>
             <%= event.content %>
           <% end %>
-          <%= link_to "詳細を表示", event_path(event) %><br>
           <div class="content_btn">
             <% if user_signed_in? && current_user.organizer_flg? %>
               <%= link_to "編集", edit_event_path(event.id), class: 'btn btn-default btn-sm btn-success' %>
               <%= link_to "削除", event_path(event.id), method: :delete, data: { confirm: '本当に削除していいですか？'}, class: 'btn btn-default btn-sm btn btn-danger' %>
             <% end %>
-            <%= link_to "イベントに参加する", participation_events_path(event), id: event.id,  class: 'btn btn-default btn-sm btn-danger' %>
+            <%= link_to "イベントに参加する", {controller:"events", action:"participation", id:event.id}, class: 'btn btn-danger' %>
           </div>
         </div>
       <% end %>
