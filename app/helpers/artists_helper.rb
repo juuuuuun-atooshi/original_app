@@ -7,7 +7,7 @@ module ArtistsHelper
       end
   end
 
-  def profile_img(artist)
+  def profile_img_artist(artist)
     return image_tag(artist.avatar, alt: artist.name) if artist.avatar?
     unless artist.avatar.blank?
       img_url = artist.avatar_url

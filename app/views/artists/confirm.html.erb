@@ -10,9 +10,9 @@
             <%= f.hidden_field :avatar %>
             <%= f.hidden_field :avatar_cache %>
 
-            <p><%= profile_img(@artist) %></p>
+            <p><%= profile_img_artist(@artist) %></p>
             <p>アーティスト名：<%= @artist.name %></p>
-            <p>ジャンル：<%= Artist.genres.keys[(@artist[:genre].to_i-1)] %></p>
+            <p>ジャンル：<%= @artist.genre %></p>
             <p>アーティスト紹介：<%= @artist.self_introduction %></p>
             <%= f.submit "登録",class: 'btn btn-primary btn-block'  %><br>
         <% end %>
