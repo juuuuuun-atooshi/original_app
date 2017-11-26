@@ -7,7 +7,18 @@ Rails.application.routes.draw do
     get :participation, on: :collection
     patch :participation, on: :collection
     # post :show, on: :collection
+    get :searchinfo, on: :collection
+    post :search, on: :collection
   end
+
+  resources :artists, only:[:new, :create, :update, :destroy, :show] do
+    post :confirm, on: :collection
+  end
+
+  resources :organizers, only:[:new, :create, :update, :destroy, :show] do
+    post :confirm, on: :collection
+  end
+
 
   resources :conversations do
     resources :messages

@@ -64,6 +64,43 @@ textarea {
 //   margin-bottom: 150px;
 // }
 
+.search_word {
+  margin: 10px 10px;
+  padding: 10px;
+  border: double 10px black;
+}
+
+.search_result_list {
+  margin: 10px 10px;
+  padding: 10px;
+  border: double 10px black;
+}
+
+.search_btn {
+  text-align: right;
+}
+
+#search_result {
+  margin-bottom: 150px;
+}
+
+.result {
+  height: auto;
+  background-color: #EEEEEE;
+  border-bottom: 1px solid #ccc;
+  text-align: left;
+  word-wrap: break-word;
+  padding: 10px;
+  .content_btn {
+    text-align: right;
+  }
+}
+
+.none_result {
+  padding: 50px;
+  text-align: center;
+}
+
 .confirm_area_btn {
   margin-bottom: 130px;
 }

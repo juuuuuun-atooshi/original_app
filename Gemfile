@@ -77,3 +77,9 @@ gem 'carrierwave'
 gem 'mini_magick'
 
 gem 'pusher'
+
+gem 'streamio-ffmpeg'
+
+gem 'flowplayer', git: 'git://github.com/scottdavis/flowplayer-gem.git'
+
+gem 'carrierwave-audio', git: 'git@github.com:tanakaworld/carrierwave-audio.git'

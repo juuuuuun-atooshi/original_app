@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="wrapper">
+    <h2>マイページ</h2>
+    <div class="detail_screen clearfix">
+      <div class="all_area">
+        <div class="left_area">
+          <div class="artist_image_area">
+            <%= profile_img(@artist) %>
+          </div>
+          <div class="organizer_info">
+            <h2>マイページの情報</h2>
+          </div>
+        </div>
+        <div class="artist_content">
+          <h2>マイページ紹介</h2>
+          <%= @artist.self_introduction %>
+        </div>
+      </div>
+      <div class="btn_area">
+        <div class="menu_btn">
+          <% if current_user.organizer_flg %>
+            <%= link_to '逆指名', root_path , class: 'btn btn-default btn-sm btn-success' %>
+          <% end %>
+          <% if @artist.user_id != current_user.id %>
+            <%= link_to "メッセージ", conversations_path(sender_id: current_user.id, recipient_id: @artist.id), method: 'post' %>
+          <% end %>
+          <%= link_to "気になるアーティスト一覧" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

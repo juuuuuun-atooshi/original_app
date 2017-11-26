@@ -1,0 +1,51 @@
+<div class="search_result_list">
+  <h2>検索結果一覧</h2>
+    <% if params[:search_event].blank? %>
+      <% if @artists.blank? %>
+        <div class="none_result">
+          <h2>該当するアーティストが見つかりませんでした</h2>
+        </div>
+      <% else %>
+        <% @artists.each do |artist| %>
+          <div class="artist_menu">
+            <%= artist.name %><br>
+            <%= artist[:genre] %><br>
+            <%= artist.self_introduction %><br>
+            <%= link_to "メッセージ送る", conversations_path(sender_id: current_user.id, recipient_id: artist.id) %>
+            <% if current_user.organizer_flg %>
+              <%= link_to "逆指名する" %>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %>
+    <% else %>
+      <% if @events.blank? %>
+        <div class="none_result">
+          <h2>該当するイベントが見つかりませんでした</h2>
+        </div>
+      <% else %>
+        <% @events.each do |event| %>
+          <div class="event_menu clearfix">
+            <%= link_to event_path(event) do %>
+              <strong><%= event.title %></strong><br>
+            <% end %>
+            <%= event.date %><br>
+            <%= photo_img(event) %>
+            <% if event.content.length > 500  %>
+              <%= event.content.truncate(535) %>
+              <%= link_to "詳細を表示", event_path(event) %><br>
+            <% else %>
+              <%= event.content %>
+            <% end %>
+            <div class="content_btn">
+              <% if user_signed_in? && current_user.organizer_flg? %>
+                <%= link_to "編集", edit_event_path(event.id), class: 'btn btn-default btn-sm btn-success' %>
+                <%= link_to "削除", event_path(event.id), method: :delete, data: { confirm: '本当に削除していいですか？'}, class: 'btn btn-default btn-sm btn btn-danger' %>
+              <% end %>
+              <%= link_to "イベントに参加する", {controller:"events", action:"participation", id:event.id}, class: 'btn btn-danger' %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
+</div>

@@ -1,3 +1,19 @@
+GIT
+  remote: git://github.com/scottdavis/flowplayer-gem.git
+  revision: 8bb5fcdc1d0c038abdf9c144e8911f560cd66bbd
+  specs:
+    flowplayer (0.1.3)
+      json
+
+GIT
+  remote: git@github.com:tanakaworld/carrierwave-audio.git
+  revision: b0132d6ee2436578dda059a424d4964f3f81b068
+  specs:
+    carrierwave-audio (1.0.7)
+      carrierwave (>= 0.10.0)
+      ruby-sox (>= 0.0.3)
+      soxi-wrapper (>= 0.0.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -253,6 +269,7 @@ GEM
     responders (2.4.0)
       actionpack (>= 4.2.0, < 5.3)
       railties (>= 4.2.0, < 5.3)
+    ruby-sox (0.0.3)
     sass (3.5.3)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
@@ -267,6 +284,7 @@ GEM
     sdoc (0.4.2)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    soxi-wrapper (0.0.1)
     spring (2.0.2)
       activesupport (>= 4.2)
     sprockets (3.7.1)
@@ -276,6 +294,8 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    streamio-ffmpeg (3.0.2)
+      multi_json (~> 1.8)
     temple (0.8.0)
     thor (0.20.0)
     thread_safe (0.3.6)
@@ -309,10 +329,12 @@ DEPENDENCIES
   byebug
   cancan
   carrierwave
+  carrierwave-audio!
   coffee-rails (~> 4.1.0)
   devise
   dotenv-rails
   faker
+  flowplayer!
   jbuilder (~> 2.0)
   jquery-rails
   jquery-turbolinks
@@ -330,6 +352,7 @@ DEPENDENCIES
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   spring
+  streamio-ffmpeg
   turbolinks
   twitter-bootstrap-rails
   uglifier (>= 1.3.0)

@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="wrapper">
+    <h2>マイページ</h2>
+    <div class="detail_screen clearfix">
+      <div class="all_area">
+        <div class="left_area">
+          <div class="image_area">
+            <%= photo_img(@organizer) %>
+          </div>
+          <div class="organizer_info">
+            <h2>マイページの情報</h2>
+          </div>
+        </div>
+        <div class="organizer_content">
+          <h2>マイページ紹介</h2>
+          <%= @organizer.content %>
+        </div>
+      </div>
+      <div class="btn_area">
+        <div class="menu_btn">
+          <%= link_to "逆指名" %>
+          <%= link_to "メッセージ" %>
+          <%= link_to "気になるアーティスト一覧" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

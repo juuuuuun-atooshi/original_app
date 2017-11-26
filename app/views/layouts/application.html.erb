@@ -25,17 +25,20 @@
             <ul class="nav navbar-nav navbar-right">
               <li><%= link_to "お問い合わせ" %></li>
               <% if user_signed_in? %>
-                <li><%= link_to 'マイページ', edit_user_registration_path %></li>
-                <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
+                <!-- <li><%= link_to 'マイページ', edit_user_registration_path %></li> -->
                 <% if current_user.organizer_flg %>
+                  <li><%= link_to 'マイページ', organizer_path(current_user.id) %></li>
                   <li><%= link_to "イベント作成", new_event_path %></li>
+                <% else %>
+                  <li><%= link_to 'マイページ', artist_path(current_user.id) %></li>
                 <% end %>
+                  <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
               <% else %>
                 <li><%= link_to "ログイン", new_user_session_path %></li>
                 <li><%= link_to "サインアップ", new_user_registration_path %></li>
               <% end %>
-              <li><%= link_to "イベント検索" %></li>
-              <li><%= link_to "アーティスト検索" %></li>
+              <li><%= link_to "イベント検索", searchinfo_events_path(link_name:'event') %></li>
+              <li><%= link_to "アーティスト検索", searchinfo_events_path(link_name:'artist') %></li>
             </ul>
           </div><!-- /.navbar-collapse -->
         </div>
