@@ -1,6 +1,5 @@
 class MessagesController < ApplicationController
   before_action do
-    binding.pry
     @conversation = Conversation.find(params[:conversation_id])
   end
 
@@ -31,6 +30,7 @@ class MessagesController < ApplicationController
 
     # 新規投稿のメッセージ用の変数を作成
     @message = @conversation.messages.build
+    @artist = Artist.find_by(user_id: current_user.id)
   end
 
   def create

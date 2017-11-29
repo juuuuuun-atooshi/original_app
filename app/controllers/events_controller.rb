@@ -78,6 +78,7 @@ class EventsController < ApplicationController
       else
         @artist = Search::Artist.new(search_artist_params)
         @artists = @artist.matches
+        @test = Artist.find_by(user_id: current_user.id)
       end
 
       format.html { redirect_to searchinfo_events_path }

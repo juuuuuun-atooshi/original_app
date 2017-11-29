@@ -1,0 +1,55 @@
+
+<div class="container">
+  <h2>気になるアーティスト一覧</h2>
+  <div class="artist_list col-md-6 col-sm-12 col-xs-12">
+  <div class="wrapper">
+    <div class="col-md-12 col-sm-12 col-xs-12" >
+        <% @followeds.each_with_index do |followed, i| %>
+          <% if followed.id != current_user.id %>
+            <% if i.even? %>
+              <div class="left_area">
+                <div class="row">
+                  <div class="container-child col-md-7 col-sm-4 col-xs-6">
+                    <div class="follow">
+                      <div class="left">
+                        <strong><%= followed.name %></strong>
+                        <%= profile_img(followed) %>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="btn_menu">
+                    <% if current_user.organizer_flg? %>
+                      <%= link_to "逆指名", root_path, class:"btn btn-success" %><br>
+                    <% end %>
+                    <%= link_to "アーティスト詳細", {controller:"artists", action:"show", id:followed.id, event_name: 'aritst_detail'}, class:"btn btn-success" %><br>
+                    <%= render 'follow_form', artist: followed %>
+                  </div>
+                </div>
+              </div>
+            <% else %>
+              <div class="right_area">
+                <div class="row">
+                  <div class="container-child col-md-7 col-sm-4 col-xs-6">
+                    <div class="follow">
+                      <div class="left">
+                        <strong><%= followed.name %></strong>
+                        <%= profile_img(followed) %>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="btn_menu">
+                    <% if current_user.organizer_flg? %>
+                      <%= link_to "逆指名", root_path, class:"btn btn-success" %><br>
+                    <% end %>
+                    <%= link_to "アーティスト詳細", {controller:"artists", action:"show", id:followed.id, event_name: 'aritst_detail'}, class:"btn btn-success" %><br>
+                    <%= render 'follow_form', artist: followed %>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

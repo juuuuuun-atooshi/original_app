@@ -1,5 +1,11 @@
 class ArtistsController < ApplicationController
   before_action :set_artist, only:[:show, :edit, :update, :destroy]
+  before_action :set_loginUser, only:[:index, :show]
+
+  def index
+    @followeds = @loginUser.followed_users
+    @followers = @loginUser.followers
+  end
 
   def show
   end
@@ -46,7 +52,11 @@ class ArtistsController < ApplicationController
     end
 
     def set_artist
-      @artist = Artist.find_by(user_id: params[:id])
+      @artist = Artist.find(params[:id])
+    end
+
+    def set_loginUser
+      @loginUser = Artist.find_by(user_id: current_user.id)
     end
 
 end

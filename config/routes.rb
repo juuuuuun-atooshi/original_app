@@ -11,14 +11,13 @@ Rails.application.routes.draw do
     post :search, on: :collection
   end
 
-  resources :artists, only:[:new, :create, :update, :destroy, :show] do
+  resources :artists, only:[:index, :new, :create, :update, :destroy, :show] do
     post :confirm, on: :collection
   end
 
   resources :organizers, only:[:new, :create, :update, :destroy, :show] do
     post :confirm, on: :collection
   end
-
 
   resources :conversations do
     resources :messages
@@ -29,6 +28,8 @@ Rails.application.routes.draw do
     get :participation, on: :collection
     patch :create, on: :collection
   end
+
+  resources :concerns, only:[:create, :destroy]
 
   root "events#index"
 

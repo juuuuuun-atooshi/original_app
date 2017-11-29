@@ -21,10 +21,14 @@
           <% if current_user.organizer_flg %>
             <%= link_to '逆指名', root_path , class: 'btn btn-default btn-sm btn-success' %>
           <% end %>
-          <% if @artist.user_id != current_user.id %>
-            <%= link_to "メッセージ", conversations_path(sender_id: current_user.id, recipient_id: @artist.id), method: 'post' %>
+          <p class="message-btn">
+            <%= link_to "メッセージ", conversations_path(sender_id: current_user.id, recipient_id: @artist.id), class: 'btn btn-primary' %>
+          </p>
+          <% if params[:id] == @loginUser.id.to_s %>
+            <%= link_to "気になるアーティスト一覧へ", artists_path, class: 'btn btn-warning' %>
+          <% else %>
+             <%= render 'follow_form', artist: @artist %>
           <% end %>
-          <%= link_to "気になるアーティスト一覧" %>
         </div>
       </div>
     </div>
