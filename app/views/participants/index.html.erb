@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="wrapper">
+    <h2>参加予定イベント一覧</h2>
+    <% if @participants.blank? %>
+        <h2>現在、参加予定のイベントはありません。</h2>
+    <% else %>
+    <% @participants.each do |participant| %>
+      <div class="event_menu clearfix">
+        <%= link_to event_path(participant.event) do %>
+          <strong><%= participant.event.title %></strong><br>
+        <% end %>
+        <%= participant.event.date %><br>
+        <%= photo_img(participant.event) %>
+        <% if participant.event.content.length > 500  %>
+          <%= participant.event.content.truncate(535) %>
+          <%= link_to "詳細を表示", event_path(participant.event) %><br>
+        <% else %>
+          <%= participant.event.content %>
+        <% end %>
+        <div class="content_btn">
+          <%= link_to "イベント参加を取り止める", {controller:"participants", action:"confirm", id:participant.event.id}, method: 'post',  class: 'btn btn-default' %>
+        </div>
+      </div>
+    <% end %>
+    <% end %>
+  </div>
+</div>

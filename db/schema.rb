@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171118093928) do
+ActiveRecord::Schema.define(version: 20171201092527) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,14 +79,14 @@ ActiveRecord::Schema.define(version: 20171118093928) do
   add_index "notifications", ["user_id"], name: "index_notifications_on_user_id", using: :btree
 
   create_table "organizers", force: :cascade do |t|
-    t.string   "organization_name"
+    t.string   "name"
     t.string   "daihyo_name"
     t.string   "tel_number"
     t.text     "content"
     t.string   "sns_address"
     t.string   "image"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.integer  "user_id"
     t.string   "avatar"
   end

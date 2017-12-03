@@ -1,5 +1,5 @@
 class Artist < ActiveRecord::Base
-  belongs_to :user
+  belongs_to :user, dependent: :destroy
 
   mount_uploader :avatar, AvatarUploader
   mount_uploader :singing, SingingUploader
@@ -12,17 +12,5 @@ class Artist < ActiveRecord::Base
 
   has_many :followed_users, through: :concerns, source: :followed
   has_many :followers, through: :reverse_concerns, source: :follower
-
-  def follow!(other_user)
-    concerns.create!(followed_id: other_user.id)
-  end
-
-  def following?(other_user)
-    concerns.find_by(followed_id: other_user.id)
-  end
-
-  def unfollow!(other_user)
-    concerns.find_by(followed_id: other_user.id).destroy
-  end
 
 end

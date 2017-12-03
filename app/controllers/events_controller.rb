@@ -64,21 +64,20 @@ class EventsController < ApplicationController
 
   def searchinfo
     if params[:link_name] == 'event'
-      @search_event = Search::Event.new
+      @q = Event.ransack(params[:q])
     else
-      @search_artist = Search::Artist.new
+      @q = Artist.ransack(params[:q])
     end
   end
 
   def search
     respond_to do |format|
-      if params[:search_artist].blank?
-        @events = Search::Event.new(search_event_params)
-        @events = @events.matches.order(date: :asc)
+      if params[:id] == 'event'
+        @q = Event.ransack(params[:q])
+        @results = @q.result
       else
-        @artist = Search::Artist.new(search_artist_params)
-        @artists = @artist.matches
-        @test = Artist.find_by(user_id: current_user.id)
+        @q = Artist.ransack(params[:q])
+        @results = @q.result
       end
 
       format.html { redirect_to searchinfo_events_path }

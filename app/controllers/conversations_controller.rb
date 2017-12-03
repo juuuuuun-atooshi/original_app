@@ -2,8 +2,14 @@ class ConversationsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @artists = Artist.all
-    @artist = Artist.find_by(user_id: current_user.id)
+    # if current_user.organizer_flg == false
+    #   @artists = Artist.all
+    #   @user = Artist.find_by(user_id: current_user.id)
+    # else
+    #   @artists = Organizer.all
+    #   @user = Organizer.find_by(user_id: current_user.id)
+    # end
+    @users = User.all
     @conversations = Conversation.all
   end
 

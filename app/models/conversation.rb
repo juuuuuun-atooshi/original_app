@@ -11,9 +11,34 @@ class Conversation < ActiveRecord::Base
 
   def target_user(current_user)
     if sender_id == current_user.id
-      User.find(recipient_id)
+      user = User.find(recipient_id)
+      if user.organizer_flg == false
+        Artist.find_by(user_id: user.id)
+      else
+        Organizer.find_by(user_id: user.id)
+      end
     elsif recipient_id == current_user.id
-      User.find(sender_id)
+      user = User.find(sender_id)
+      if user.organizer_flg == false
+        Artist.find_by(user_id: user.id)
+      else
+        Organizer.find_by(user_id: user.id)
+      end
     end
+
+    # if current_user.class.name == 'Artist'
+    #   if sender_id == current_user.artist.ids[0]
+    #     Artist.find(recipient_id)
+    #   elsif recipient_id == current_user.artist.ids[0]
+    #     Artist.find(sender_id)
+    #   end
+    # else
+    #   if sender_id == current_user.organizer.ids[0]
+    #     Organizer.find(recipient_id)
+    #   elsif recipient_id == current_user.organizer.ids[0]
+    #     Organizer.find(sender_id)
+    #   end
+    # end
+
   end
 end

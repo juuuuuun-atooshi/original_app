@@ -23,9 +23,10 @@ Rails.application.routes.draw do
     resources :messages
   end
 
-  resources :participants, only:[:create] do
+  resources :participants, only:[:index,:create, :destroy] do
     # post :create, on: :collection
     get :participation, on: :collection
+    post :confirm, on: :collection
     patch :create, on: :collection
   end
 

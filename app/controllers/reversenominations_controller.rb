@@ -1,0 +1,2 @@
+class ReversenominationsController < ApplicationController
+end

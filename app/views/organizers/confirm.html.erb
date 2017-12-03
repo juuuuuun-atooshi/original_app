@@ -4,13 +4,13 @@
 
         <%= form_for(@organizer) do |f| %>
 
-            <%= f.hidden_field :organization_name %>
+            <%= f.hidden_field :name %>
             <%= f.hidden_field :daihyo_name %>
             <%= f.hidden_field :tel_number %>
             <%= f.hidden_field :content %>
             <%= f.hidden_field :sns_address %>
 
-            <p>団体名：<%= @organizer.organization_name %></p>
+            <p>団体名：<%= @organizer.name %></p>
             <p>代表者氏名：<%= @organizer.daihyo_name %></p>
             <p>電話番号：<%= @organizer.tel_number %></p>
             <p>団体紹介：<%= @organizer.content %></p>
@@ -19,7 +19,7 @@
         <% end %>
 
         <%= form_for(@organizer, url: new_organizer_path, method:'get') do |f| %>
-        <%= f.hidden_field :organization_name %>
+        <%= f.hidden_field :name %>
         <%= f.hidden_field :daihyo_name %>
         <%= f.hidden_field :tel_number %>
         <%= f.hidden_field :content %>

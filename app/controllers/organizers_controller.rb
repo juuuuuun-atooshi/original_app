@@ -42,7 +42,7 @@ class OrganizersController < ApplicationController
 
   private
     def organizer_params
-      params.require(:organizer).permit(:organization_name, :daihyo_name, :tel_number, :content, :sns_address, :avatar)
+      params.require(:organizer).permit(:name, :daihyo_name, :tel_number, :content, :sns_address, :avatar)
     end
 
     def set_organizer

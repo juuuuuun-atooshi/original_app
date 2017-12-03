@@ -3,36 +3,26 @@
 }
 
 .artist_image_area {
-  width: 450px;
+  width: auto;
 }
 
 .artist_content {
+  width: auto;
   max-height: 100%;
-  margin-left: 530px;
+  // margin-left: 530px;
   word-wrap: break-word;
   overflow: scroll;
 }
 
 .artist_list {
-  width: 100%;
-  height: auto;
+  // width: 100%;
+  // height: auto;
   margin-bottom: 120px;
 
   .left_area {
     .row {
-      width: 500px;
-      height: 344px;
-      margin: 10px 10px;
-      padding: 10px;
-      border: double 10px black;
-    }
-  }
-
-  .right_area {
-    display:grid;
-    .row {
-      width: 500px;
-      height: 344px;
+      width: auto;
+      height: 400px;
       margin: 10px 10px;
       padding: 10px;
       border: double 10px black;
@@ -51,19 +41,17 @@
 }
 
 .btn_menu {
-  margin-top: 200px;
-  text-align: right;
+  position: absolute;
+  bottom: 50px;
+  right: 60px;
+  .reverse_btn {
+    text-align: right;
+  }
+  .artist_detail_btn {
+    text-align: right;
+  }
 }
 
-.right {
-  float: left;
-}
-
-.message-btn {
-  float: left;
-  text-align: right;
-  margin-left: 825px;
-}
 
 .clearfix:after{
   content: "";

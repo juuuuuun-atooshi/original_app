@@ -4,14 +4,14 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
-  has_many :artists, dependent: :destroy
+  has_many :artist, dependent: :destroy
   has_many :organizer, dependent: :destroy
 
-  # has_many :concerns, foreign_key:"follower_id", dependent: :destroy
-  # has_many :reverse_concerns, foreign_key:"followed_id", class_name: "Concern", dependent: :destroy
+  has_many :concerns, foreign_key:"follower_id", dependent: :destroy
+  has_many :reverse_concerns, foreign_key:"followed_id", class_name: "Concern", dependent: :destroy
 
-  # has_many :followed_users, through: :concerns, source: :followed
-  # has_many :followers, through: :reverse_concerns, source: :follower
+  has_many :followed_users, through: :concerns, source: :followed
+  has_many :followers, through: :reverse_concerns, source: :follower
 
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
     user = User.find_by(provider: auth.provider, uid: auth.uid)
@@ -60,6 +60,18 @@ class User < ActiveRecord::Base
       params.delete :current_password
       update_without_password(params, *options)
     end
+  end
+
+  def follow!(other_user)
+    concerns.create!(followed_id: other_user.id)
+  end
+
+  def following?(other_user)
+    concerns.find_by(followed_id: other_user.id)
+  end
+
+  def unfollow!(other_user)
+    concerns.find_by(followed_id: other_user.id).destroy
   end
 
 end
