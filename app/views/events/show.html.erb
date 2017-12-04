@@ -18,8 +18,12 @@
         </div>
         <div class="btn_area">
           <div class="menu_btn">
-            <%= f.submit "イベントに参加する" %>
-            <%= f.submit "イベント参加者一覧" %>
+            <% if check_participant(@event.id) == nil %>
+              <%= f.submit "イベントに参加する" %>
+            <% else %>
+              <%= link_to "イベント参加を取り止める", {controller:"participants", action:"confirm", id:@event.id}, method: 'post', class: 'btn btn-default' %>
+            <% end %>
+            <%= link_to "イベント参加者一覧" %>
           </div>
           <div class="back_btn">
             <%= link_to "戻る", events_path %>

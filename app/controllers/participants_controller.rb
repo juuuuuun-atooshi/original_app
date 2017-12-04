@@ -24,7 +24,6 @@ class ParticipantsController < ApplicationController
 
   def destroy
     @participant = Participant.find_by(event_id: params[:id], participant_id: current_user.artist.ids[0])
-    binding.pry
     @participant.destroy
     redirect_to events_path, notice: 'イベント参加を取り止めました。'
   end

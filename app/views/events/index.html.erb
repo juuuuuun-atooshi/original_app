@@ -26,14 +26,19 @@
               <%= event.content %>
             <% end %>
             <div class="content_btn">
-              <% if user_signed_in? && current_user.organizer_flg? %>
-                <%= link_to "編集", edit_event_path(event.id), class: 'btn btn-default btn-sm btn-success' %>
-                <%= link_to "削除", event_path(event.id), method: :delete, data: { confirm: '本当に削除していいですか？'}, class: 'btn btn-default btn-sm btn btn-danger' %>
-              <% end %>
-              <% if check_participant(event.id) == nil %>
-                <%= link_to "イベントに参加する", {controller:"events", action:"participation", id:event.id}, class: 'btn btn-danger' %>
+              <% if user_signed_in? %>
+                <% if current_user.organizer_flg? %>
+                  <%= link_to "編集", edit_event_path(event.id), class: 'btn btn-default btn-sm btn-success' %>
+                  <%= link_to "削除", event_path(event.id), method: :delete, data: { confirm: '本当に削除していいですか？'}, class: 'btn btn-default btn-sm btn btn-danger' %>
+                <% else %>
+                  <% if check_participant(event.id) == nil %>
+                    <%= link_to "イベントに参加する", {controller:"events", action:"participation", id:event.id}, class: 'btn btn-danger' %>
+                  <% else %>
+                    <%= link_to "イベント参加を取り止める", {controller:"participants", action:"confirm", id:event.id}, method: 'post', class: 'btn btn-default' %>
+                  <% end %>
+                <% end %>
               <% else %>
-                <%= link_to "イベント参加を取り止める", {controller:"participants", action:"confirm", id:event.id}, method: 'post', class: 'btn btn-default' %>
+                <%= link_to "イベントに参加する", {controller:"events", action:"participation", id:event.id}, class: 'btn btn-danger' %>
               <% end %>
             </div>
           </div>

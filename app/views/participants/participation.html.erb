@@ -16,7 +16,7 @@
             <%= f.submit "参加",class: 'btn btn-primary btn-block'  %><br>
         <% end %>
 
-        <%= form_for(@event, url: new_event_path, method:'get') do |f| %>
+        <%= form_for(@event, url: event_path(@event.id), method:'get') do |f| %>
         <%= f.hidden_field :title %>
         <%= f.hidden_field :date %>
         <%= f.hidden_field :content %>

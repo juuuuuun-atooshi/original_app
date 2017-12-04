@@ -8,7 +8,8 @@
           <%= f.label :イベントタイトル %>
           <%= f.search_field :title_cont, class: 'form-control' %>
           <%= f.label :開催日 %>
-          <%= f.date_field :date, class: 'form-control' %>
+          <%= f.date_select :date_gteq, include_blank: true, class: 'form-control' %>〜
+          <%= f.date_select :date_lteq, include_blank: true, class: 'form-control' %><br>
           <%= f.label :フリーワード %>
           <%= f.search_field :content_cont, class: 'form-control' %><br>
           <div class="search_btn">
