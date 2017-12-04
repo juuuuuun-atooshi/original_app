@@ -6,7 +6,6 @@ Rails.application.routes.draw do
     post :confirm, on: :collection
     get :participation, on: :collection
     patch :participation, on: :collection
-    # post :show, on: :collection
     get :searchinfo, on: :collection
     post :search, on: :collection
   end
@@ -24,13 +23,17 @@ Rails.application.routes.draw do
   end
 
   resources :participants, only:[:index,:create, :destroy] do
-    # post :create, on: :collection
     get :participation, on: :collection
     post :confirm, on: :collection
     patch :create, on: :collection
   end
 
   resources :concerns, only:[:create, :destroy]
+
+  resources :reversenominations do
+    post :confirm, on: :collection
+    post :search, on: :collection
+  end
 
   root "events#index"
 
