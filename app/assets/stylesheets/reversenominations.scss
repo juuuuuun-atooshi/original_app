@@ -1,3 +1,16 @@
 .reversenomination_area {
+  margin: 10px 10px;
+  padding: 10px;
+  border: double 10px black;
   margin-bottom: 140px;
+  form > img {
+    width: 100px;
+  }
+}
+
+.reversenomination_area > form > p > img {
+  width: 300px;
+}
+
+.reversenomination_send_area {
 }

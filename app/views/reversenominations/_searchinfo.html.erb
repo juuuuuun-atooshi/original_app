@@ -11,11 +11,7 @@
             <%= artist.name %><br>
             <%= artist[:genre] %><br>
             <%= artist.self_introduction %><br>
-            <%= link_to "メッセージ送る", conversations_path(sender_id: current_user.id, recipient_id: artist.id), method: 'post' %>
-            <%= link_to "アーティスト詳細", {controller:"artists", action:"show", id:artist.id, event_name: 'aritst_detail'}  %>
-            <% if current_user.organizer_flg %>
-              <%= link_to "逆指名する", {controller:"reversenominations", action:"new", artist_id:artist.id} %>
-            <% end %>
+            <%= link_to "選択", search_reversenominations_path(artist_id: artist.id), method: 'post' %>
           </div>
         <% end %>
       <% end %>

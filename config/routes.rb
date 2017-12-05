@@ -32,7 +32,6 @@ Rails.application.routes.draw do
 
   resources :reversenominations do
     post :confirm, on: :collection
-    post :search, on: :collection
   end
 
   root "events#index"

@@ -1,5 +1,16 @@
 <div class="container">
   <div class="wrapper">
     <h2>逆指名送信入力フォーム</h2>
+      <div class="reversenomination_area col-md-12">
+        <%=form_for(@reversenomination, url:confirm_reversenominations_path) do |f| %>
+          <h2>【アーティスト情報】</h2>
+          <h2>【イベント情報】</h2>
+          <%= f.label :出演してもらうイベントを選択してください %><br>
+          <%= f.collection_select :id, Event.all.where(organizer_id: @organizer.id), :id, :title, include_blank: true %>
+          <h2>【逆指名特典情報】</h2>
+          <%=f.text_area :privilege, class: 'form-control' %><br>
+          <%= f.submit '確認画面', class: 'btn btn-primary btn-block' %>
+        <% end %>
+      </div>
   </div>
 </div>

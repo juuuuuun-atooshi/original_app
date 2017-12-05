@@ -3,32 +3,10 @@ class ReversenominationsController < ApplicationController
   end
 
   def new
-    @events = Event.ransack(params[:q])
-    @artists = Artist.ransack(params[:q])
-    if params[:back]
-      @reversenomination = Reversenomination.new(reversenomination_params)
-    elsif params[:direct]
-      @reversenomination = Reversenomination.new
-      @artist = Artist.find(params[:id])
-    else
-      @reversenomination = Reversenomination.new
-    end
-  end
+    @organizer = Organizer.find_by(user_id: current_user.id)
+    @artist = Artist.find_by(user_id: params[:artist_id])
 
-  def search
-    respond_to do |format|
-      if params[:id] == 'event'
-        @q = Event.ransack(params[:q])
-        @results = @q.result
-      else
-        @q = Artist.ransack(params[:q])
-        @results = @q.result
-      end
-
-      format.html { redirect_to searchinfo_events_path }
-      format.js { render :searchinfo }
-    end
-
+    @reversenomination = Reversenomination.new
   end
 
   def create
@@ -38,6 +16,7 @@ class ReversenominationsController < ApplicationController
   end
 
   def confirm
+    binding.pry
   end
 
   private

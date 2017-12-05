@@ -20,7 +20,9 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.create(events_params)
-    @event.organizer_id = current_user.id
+    @organizer = Organizer.find_by(user_id: current_user.id)
+    # @event.organizer_id = current_user.id
+    @event.organizer_id = @organizer.id
     if @event.save
       redirect_to events_path, notice: 'イベントを投稿しました！'
     else
