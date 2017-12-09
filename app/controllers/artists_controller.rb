@@ -48,7 +48,7 @@ class ArtistsController < ApplicationController
 
   private
     def artist_params
-      params.require(:artist).permit(:name, :genre, :self_introduction, :singing, :play_video, :avatar, :avatar_cache)
+      params.require(:artist).permit(:name, :genre, :self_introduction, :singing, :singing_cache, :play_video, :play_video_cache, :avatar, :avatar_cache)
     end
 
     def set_artist

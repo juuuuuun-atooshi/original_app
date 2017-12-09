@@ -4,10 +4,18 @@ class EventsController < ApplicationController
 
 
   def index
-    @events = Event.all
+    @events = Event.all.order(created_at: :desc)
+    @events = Event.page(params[:page]).per(5)
   end
 
   def show
+    @events = Event.all
+    @hash = Gmaps4rails.build_markers(@event) do |event, marker|
+      marker.lat event.organizer.latitude
+      marker.lng event.organizer.longitude
+      marker.infowindow event.organizer.description
+      marker.json({name: event.organizer.name})
+    end
   end
 
   def new
@@ -77,9 +85,11 @@ class EventsController < ApplicationController
       if params[:id] == 'event'
         @q = Event.ransack(params[:q])
         @results = @q.result
+        @results = Event.page(params[:page]).per(5)
       else
         @q = Artist.ransack(params[:q])
         @results = @q.result
+        @results = Artist.page(params[:page]).per(5)
       end
 
       format.html { redirect_to searchinfo_events_path }
@@ -90,7 +100,7 @@ class EventsController < ApplicationController
 
   private
     def events_params
-      params.require(:event).permit(:title, :date, :content, :image, :image_cache)
+      params.require(:event).permit(:title, :date, :content, :genre, :image, :image_cache)
     end
 
     def search_event_params

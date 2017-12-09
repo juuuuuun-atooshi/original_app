@@ -19,11 +19,11 @@
             <% end %>
             <%= event.date %><br>
             <%= photo_img(event) %>
-            <% if event.content.length > 500  %>
-              <%= event.content.truncate(535) %>
+            <% if event.content.length > 50  %>
+              <%= simple_format(event.content.truncate(140)) %>
               <%= link_to "詳細を表示", event_path(event) %><br>
             <% else %>
-              <%= event.content %>
+              <%= simple_format(event.content) %>
             <% end %>
             <div class="content_btn">
               <% if user_signed_in? %>
@@ -43,6 +43,7 @@
             </div>
           </div>
         <% end %>
+        <%= paginate @events %>
       </div>
       <div class="wrapper col-md-3 col-sm-6 col-xs-6">
         <h3>おすすめアーティスト</h3>

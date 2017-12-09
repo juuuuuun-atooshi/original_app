@@ -25,11 +25,13 @@
   <%= f.file_field :avatar %>
   <%= f.hidden_field :avatar_cache %>
   <br>
-  <%= f.label :アピール音声 %><br>
+  <%= f.label :プロモーション音声 %><br>
   <%= f.file_field :singing %>
+  <%= f.hidden_field :singing_cache %>
   <br>
-  <%= f.label :アピール動画 %><br>
+  <%= f.label :プロモーション動画 %><br>
   <%= f.file_field :play_video %>
+  <%= f.hidden_field :play_video_cache %>
   <br>
   <%= f.submit '登録', class: 'btn btn-primary btn-block' %>
 

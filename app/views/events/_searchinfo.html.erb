@@ -9,9 +9,13 @@
         <% @results.each do |artist| %>
           <div class="artist_menu">
             <%= artist.name %><br>
-            <%= artist[:genre] %><br>
+            <%= artist.genre %><br>
             <%= artist.self_introduction %><br>
-            <%= link_to "メッセージ送る", conversations_path(sender_id: current_user.id, recipient_id: artist.id), method: 'post' %>
+            <% if user_signed_in? %>
+              <% if artist.user_id != current_user.id || current_user.organizer_flg %>
+                <%= link_to "メッセージ送る", conversations_path(sender_id: current_user.id, recipient_id: artist.id), method: 'post' %>
+              <% end %>
+            <% end %>
             <%= link_to "アーティスト詳細", {controller:"artists", action:"show", id:artist.id, event_name: 'aritst_detail'}  %>
             <% if current_user.organizer_flg %>
               <%= link_to "逆指名する", {controller:"reversenominations", action:"new", artist_id:artist.id} %>
@@ -47,6 +51,7 @@
             </div>
           </div>
         <% end %>
+        <%= paginate @results %>
       <% end %>
     <% end %>
 </div>
