@@ -8,6 +8,10 @@ class ArtistsController < ApplicationController
   end
 
   def show
+    if @artist.id != params[:id]
+      @artist.accsess_count += 1
+      @artist.save
+    end
   end
 
   def new

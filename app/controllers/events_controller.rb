@@ -6,6 +6,7 @@ class EventsController < ApplicationController
   def index
     @events = Event.all.order(created_at: :desc)
     @events = Event.page(params[:page]).per(5)
+    @artists = Artist.all.order(accsess_count: :desc).limit(5)
   end
 
   def show
@@ -85,14 +86,14 @@ class EventsController < ApplicationController
       if params[:id] == 'event'
         @q = Event.ransack(params[:q])
         @results = @q.result
-        @results = Event.page(params[:page]).per(5)
+        @results = @results.page(params[:page]).per(5)
       else
         @q = Artist.ransack(params[:q])
-        @results = @q.result
-        @results = Artist.page(params[:page]).per(5)
+        @results = @q.result.order(created_at: :asc)
+        @results = @results.page(params[:page]).per(3)
       end
 
-      format.html { redirect_to searchinfo_events_path }
+      format.html
       format.js { render :searchinfo }
     end
 

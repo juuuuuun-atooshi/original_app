@@ -3,14 +3,38 @@
   padding: 10px;
   border: double 10px black;
   margin-bottom: 140px;
-  form > img {
-    width: 100px;
+  textarea {
+    height: 300px;
   }
 }
 
-.reversenomination_area > form > p > img {
+.artist_img {
   width: 300px;
 }
 
-.reversenomination_send_area {
+.artist_field  {
+  text-align: center;
+}
+
+.reversenomination_content {
+  width: auto;
+  p {
+    text-align: center;
+  }
+}
+
+.event_image_area {
+  width: auto;
+  text-align: center;
+}
+
+.reversenomination_caution {
+  text-align: center;
+  border: inset 10px #ff0000;
+  word-wrap: break-word;
+}
+
+.tokuten {
+  word-wrap: break-word;
+
 }

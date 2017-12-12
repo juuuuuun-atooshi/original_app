@@ -7,10 +7,10 @@ class Search::Artist < Search::Base
   attr_accessor(*ATTRIBUTES)
 
   def matches
-    t = ::Artist.arel_table
+    # t = ::Artist.arel_table
     results = ::Artist.all
-    results = results.where(contains(t[:name], name)) if name.present?
-    results = results.where(contains(t[:genre], genre)) if genre.present?
+    results = results.where(name:, name) if name.present?
+    results = results.where(genre:, genre) if genre.present?
   end
 
 end

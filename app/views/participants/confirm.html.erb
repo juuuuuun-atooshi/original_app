@@ -13,7 +13,7 @@
             <p><%= photo_img(@participant.event) %></p>
             <p>イベントタイトル：<%= @participant.event.title %></p>
             <p>イベント開催日：<%= @participant.event.date %></p>
-            <p>イベント内容：<%= @participant.event.content %></p>
+            <p>イベント内容：<%= simple_format(@participant.event.content) %></p>
             <%= f.submit "キャンセル",class: 'btn btn-primary btn-block'  %><br>
         <% end %>
 

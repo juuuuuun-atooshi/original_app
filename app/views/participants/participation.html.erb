@@ -12,7 +12,8 @@
             <p><%= photo_img(@event) %></p>
             <p>イベントタイトル：<%= @event.title %></p>
             <p>イベント開催日：<%= @event.date %></p>
-            <p>イベント内容：<%= @event.content %></p>
+            <p>イベント内容：<%= simple_format(@event.content)
+             %></p>
             <%= f.submit "参加",class: 'btn btn-primary btn-block'  %><br>
         <% end %>
 

@@ -22,6 +22,7 @@
             <% end %>
           </div>
         <% end %>
+        <%= render partial: 'paginate_form', locals: { id: 'artist' }  %>
       <% end %>
     <% else %>
       <% if @results.blank? %>
@@ -51,7 +52,7 @@
             </div>
           </div>
         <% end %>
-        <%= paginate @results %>
+        <%= render partial: 'paginate_form', locals: { id: 'event' }  %>
       <% end %>
     <% end %>
 </div>

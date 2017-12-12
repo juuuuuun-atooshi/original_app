@@ -23,8 +23,8 @@
           </div>
         </div>
         <div class="artist_content col-md-6 col-xs-10">
-          <h2>マイページ紹介</h2>
-          <%= @artist.self_introduction %>
+          <h2>【アーティスト紹介】</h2>
+          <%= simple_format(@artist.self_introduction) %>
         </div>
       </div>
       <div class="btn_area">
