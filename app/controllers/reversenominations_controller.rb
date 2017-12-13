@@ -24,7 +24,7 @@ class ReversenominationsController < ApplicationController
   def create
     @reversenomination = Reversenomination.create(reversenomination_params)
 
-    if @reversenomination.save && @participant.save
+    if @reversenomination.save
       redirect_to root_path, notice: '逆指名送信を完了しました！'
     else
       render 'new'
