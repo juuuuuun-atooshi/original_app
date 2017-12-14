@@ -23,8 +23,13 @@ class ReversenominationsController < ApplicationController
 
   def create
     @reversenomination = Reversenomination.create(reversenomination_params)
+    @artsit = Artist.find(@reversenomination.artist_id)
+    binding.pry
+    @conversation = Conversation.create!(sender_id:current_user.id, recipient_id:@artsit.user.id)
+    @message = @conversation.messages.build(body:"メッセージテスト送信", user_id: current_user.id)
+    binding.pry
 
-    if @reversenomination.save
+    if @reversenomination.save && @conversation.save && @message.save
       redirect_to root_path, notice: '逆指名送信を完了しました！'
     else
       render 'new'
@@ -36,7 +41,7 @@ class ReversenominationsController < ApplicationController
 
   def confirm
     @reversenomination = Reversenomination.new(
-      artist_id:params[:artist_id], event_id:params[:event_id], reversenomination_params[:privilege])
+      artist_id:params[:artist_id], event_id:params[:event_id], privilege:reversenomination_params[:privilege])
     @artist = Artist.find(@reversenomination.artist_id)
     @event = Event.find(@reversenomination.event_id)
     render :new if @reversenomination.invalid?
