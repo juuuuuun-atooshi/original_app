@@ -9,6 +9,11 @@ class EventsController < ApplicationController
     @artists = Artist.all.order(accsess_count: :desc).limit(5)
   end
 
+  def bygenre
+    @events = Event.where(genre:params[:genre_id]).order(created_at: :desc)
+    @events = @events.page(params[:page]).per(5)
+  end
+
   def show
     @events = Event.all
     @hash = Gmaps4rails.build_markers(@event) do |event, marker|

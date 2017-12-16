@@ -5,7 +5,7 @@ class Artist < ActiveRecord::Base
   mount_uploader :singing, SingingUploader
   mount_uploader :play_video, PlayVideoUploader
 
-  enum genre: { ロック:"1", メタル:"2", ハードコア:"3", アコースティック:"4", シンガー:"5"}
+  enum genre: { ロック:"1", メタル:"2", ジャズ:"3", 弾き語り:"4", シンガー:"5"}
 
   has_many :concerns, foreign_key:"follower_id", dependent: :destroy
   has_many :reverse_concerns, foreign_key:"followed_id", class_name: "Concern", dependent: :destroy

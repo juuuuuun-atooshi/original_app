@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     patch :participation, on: :collection
     get :searchinfo, on: :collection
     post :search, on: :collection
+    get :bygenre, on: :collection
   end
 
   resources :artists, only:[:index, :new, :create, :update, :destroy, :show] do

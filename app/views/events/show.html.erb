@@ -36,7 +36,7 @@
             <% else %>
               <%= f.submit "イベントに参加する", class:'btn btn-danger' %>
             <% end %>
-            <%= link_to "イベント参加者一覧", class:'btn btn-success' %>
+            <%= link_to "イベント参加者一覧", participants_path(id: @event.id, name:"sankasha"),  class:'btn btn-success' %>
           </div>
           <div class="back_btn">
             <%= link_to "戻る", events_path %>

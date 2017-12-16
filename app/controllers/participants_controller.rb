@@ -4,10 +4,14 @@ class ParticipantsController < ApplicationController
   end
 
   def index
-    if  params[:back]
-      @participants = Participant.all.includes(:event).where(participant_id: params[:format])
+    if params[:name].blank?
+      if  params[:back]
+        @participants = Participant.all.includes(:event).where(participant_id: params[:format])
+      else
+        @participants = Participant.all.includes(:event).where(participant_id: params[:id])
+      end
     else
-      @participants = Participant.all.includes(:event).where(participant_id: params[:id])
+      @participants = Participant.all.includes(:event).where(event_id: params[:id])
     end
   end
 
