@@ -53,30 +53,32 @@
         <%= paginate @events %>
       </div>
       <div class="wrapper col-md-3 col-sm-6 col-xs-12">
-        <h2>おすすめアーティスト</h2>
-        <% @artists.each do |artist| %>
-          <%=link_to artist_path(artist) do %>
-            <div class="osusume_area">
-              <div class="prof_img col-md-2 col-sm-6 col-xs-6">
-                <%= profile_img_artist(artist) %>
+        <div class="wrapper col-md-3col-sm-6 col-xs-12">
+          <h2>おすすめアーティスト</h2>
+          <% @artists.each do |artist| %>
+            <%=link_to artist_path(artist) do %>
+              <div class="osusume_area">
+                <div class="prof_img col-md-2 col-sm-6 col-xs-6">
+                  <%= profile_img_artist(artist) %>
+                </div>
+                <%= artist.name %>
               </div>
-              <%= artist.name %>
-            </div>
+            <% end %>
           <% end %>
-        <% end %>
-      </div>
-      <div class="wrapper col-md-3 col-sm-6 col-xs-12">
-        <h2>注目のアーティスト</h2>
-        <% @artists.each do |artist| %>
-          <%=link_to artist_path(artist) do %>
-            <div class="osusume_area">
-              <div class="prof_img col-md-2 col-sm-6 col-xs-6">
-                <%= profile_img_artist(artist) %>
+        </div>
+        <div class="wrapper col-md-6col-sm-6 col-xs-12">
+          <h2>注目のアーティスト</h2>
+          <% @artists.each do |artist| %>
+            <%=link_to artist_path(artist) do %>
+              <div class="osusume_area">
+                <div class="prof_img col-md-2 col-sm-6 col-xs-6">
+                  <%= profile_img_artist(artist) %>
+                </div>
+                <%= artist.name %>
               </div>
-              <%= artist.name %>
-            </div>
+            <% end %>
           <% end %>
-        <% end %>
+        </div>
       </div>
     </div>
   </div>

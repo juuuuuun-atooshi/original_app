@@ -52,13 +52,13 @@
   handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
     markers = handler.addMarkers([
       {
-        "lat": <%= @event.organizer.latitude %>,
-        "lng": <%= @event.organizer.longitude %>,
+        "lat": <%= @event.latitude %>,
+        "lng": <%= @event.longitude %>,
         "picture": {
           "width":  32,
           "height": 32
         },
-        "infowindow": '<%= @event.organizer.name %>'
+        "infowindow": '<%= @event.address %>'
       }
     ]);
     handler.bounds.extendWith(markers);

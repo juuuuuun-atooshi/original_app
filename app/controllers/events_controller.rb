@@ -17,10 +17,9 @@ class EventsController < ApplicationController
   def show
     @events = Event.all
     @hash = Gmaps4rails.build_markers(@event) do |event, marker|
-      marker.lat event.organizer.latitude
-      marker.lng event.organizer.longitude
-      marker.infowindow event.organizer.description
-      marker.json({name: event.organizer.name})
+      marker.lat event.latitude
+      marker.lng event.longitude
+      marker.json({name: event.address})
     end
   end
 
@@ -35,7 +34,6 @@ class EventsController < ApplicationController
   def create
     @event = Event.create(events_params)
     @organizer = Organizer.find_by(user_id: current_user.id)
-    # @event.organizer_id = current_user.id
     @event.organizer_id = @organizer.id
     if @event.save
       redirect_to events_path, notice: 'イベントを投稿しました！'
@@ -106,7 +104,7 @@ class EventsController < ApplicationController
 
   private
     def events_params
-      params.require(:event).permit(:title, :date, :content, :genre, :image, :image_cache)
+      params.require(:event).permit(:title, :date, :content, :genre, :image, :image_cache, :place, :address, :latitude, :longitude)
     end
 
     def search_event_params

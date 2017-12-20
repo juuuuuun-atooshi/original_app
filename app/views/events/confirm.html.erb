@@ -10,6 +10,9 @@
             <%= f.hidden_field :genre %>
             <%= f.hidden_field :image %>
             <%= f.hidden_field :image_cache %>
+            <%= f.hidden_field :address %>
+            <%= f.hidden_field :latitude %>
+            <%= f.hidden_field :longitude %>
 
             <p><%= photo_img(@event) %></p>
             <p>イベントタイトル：<%= @event.title %></p>
@@ -26,6 +29,9 @@
           <%= f.hidden_field :genre %>
           <%= f.hidden_field :image %>
           <%= f.hidden_field :image_cache %>
+          <%= f.hidden_field :address %>
+          <%= f.hidden_field :latitude %>
+          <%= f.hidden_field :longitude %>
           <div class="confirm_area_btn">
             <%= f.submit "もどる", name:'back', class: 'btn btn-default btn-block' %>
           </div>

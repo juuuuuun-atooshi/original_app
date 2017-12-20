@@ -16,7 +16,7 @@
             <% end %>
             <h3>【プロモーション動画】</h3>
             <% unless @artist.play_video.blank? %>
-              <%= @artist.play_video %>
+              <%= video_tag(@artist.play_video_url.to_s, autoplay: false, controls: true, size:'300x250', poster:' thumbnail.jpg') %>
             <% else %>
               <p>プロモーション動画は設定されていません。</p>
             <% end %>
@@ -30,7 +30,7 @@
       <div class="btn_area">
         <div class="menu_btn">
           <% if params[:id] == @loginUser.id.to_s %>
-            <%= link_to 'マイページを編集する', root_path, id:'mypage_edit', class:'btn btn-default' %>
+            <%= link_to 'マイページを編集する', edit_artist_path(@artist.id), id:'mypage_edit', class:'btn btn-default' %>
           <% end %>
           <% if current_user.organizer_flg %>
             <%= link_to '逆指名', root_path , class: 'btn btn-default btn-sm btn-success' %>

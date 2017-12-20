@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     get :bygenre, on: :collection
   end
 
-  resources :artists, only:[:index, :new, :create, :update, :destroy, :show] do
+  resources :artists do
     post :confirm, on: :collection
   end
 
