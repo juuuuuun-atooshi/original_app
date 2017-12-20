@@ -14,7 +14,6 @@ class Search::Event < Search::Base
     results = results.where(contains(t[:content], content)) if content.present?
     results = results.where(contains(t[:title], title)) if title.present?
     results = results.where("content LIKE '%#{content}%'") if content.present?
-    binding.pry
   end
 
 end

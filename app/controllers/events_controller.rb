@@ -95,7 +95,6 @@ class EventsController < ApplicationController
       else
         @q = Artist.ransack(params[:q])
         @results = @q.result.order(created_at: :asc)
-        binding.pry
         @results = @results.page(params[:page]).per(3)
       end
 
