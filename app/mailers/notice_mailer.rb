@@ -10,4 +10,11 @@ class NoticeMailer < ApplicationMailer
 
     mail to: "to@example.org"
   end
+
+  def sendmail_contact(contact)
+    @contact = contact
+
+    mail to: @contact.email,
+         subject: '問い合わせがありました。'
+  end
 end

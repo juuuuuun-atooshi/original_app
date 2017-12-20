@@ -25,7 +25,7 @@
           </div>
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-              <li><%= link_to "お問い合わせ" %></li>
+              <li><%= link_to "お問い合わせ", new_contact_path %></li>
               <li><%= link_to "イベント検索", searchinfo_events_path(link_name:'event') %></li>
               <li><%= link_to "アーティスト検索", searchinfo_events_path(link_name:'artist') %></li>
               <% if user_signed_in? %>

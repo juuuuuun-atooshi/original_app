@@ -43,6 +43,10 @@ Rails.application.routes.draw do
     get :privilege, on: :collection
   end
 
+  resources :contacts, only:[:new, :create] do
+    post :confirm, on: :collection
+  end
+
   root "events#index"
 
   # The priority is based upon order of creation: first created -> highest priority.
