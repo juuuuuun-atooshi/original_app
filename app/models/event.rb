@@ -1,4 +1,10 @@
 class Event < ActiveRecord::Base
+  validates :title, presence: true
+  validates :date, presence: true
+  validates :content, presence: true
+  validates :address, presence: true
+
+
   belongs_to :organizer
 
   mount_uploader :image, ImageUploader

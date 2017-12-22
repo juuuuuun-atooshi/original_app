@@ -15,7 +15,7 @@ class NoticeMailer < ApplicationMailer
     @contact = contact
 
     mail(
-      to: "16290111jun@gmail.com",
+      to: ENV['ADMIN_ADDRESS'],
       subject: '利用者様より問い合わせがありました。'
     ) do |format|
       format.text
