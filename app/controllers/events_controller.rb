@@ -23,6 +23,16 @@ class EventsController < ApplicationController
     end
   end
 
+  def showlink
+    @events = Event.all
+    @hash = Gmaps4rails.build_markers(@event) do |event, marker|
+      marker.lat event.latitude
+      marker.lng event.longitude
+      marker.json({name: event.address})
+    end
+    render 'show' if user_signed_in?
+  end
+
   def new
     if params[:back]
       @event = Event.new(events_params)

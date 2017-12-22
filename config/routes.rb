@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     get :searchinfo, on: :collection
     post :search, on: :collection
     get :bygenre, on: :collection
+    get :showlink, on: :collection
   end
 
   resources :artists do
