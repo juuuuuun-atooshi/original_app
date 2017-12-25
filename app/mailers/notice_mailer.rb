@@ -22,11 +22,12 @@ class NoticeMailer < ApplicationMailer
     end
   end
 
-  def sendmail_participant(event, user, artist, participant)
+  def sendmail_participant(event, user, artist, participant, user_session)
     @event = event
     @user = user
     @artist = artist
     @participant = participant
+    @session = user_session
     mail(
       to: @user.email,
       subject: 'イベント参加ありがとうございます！'

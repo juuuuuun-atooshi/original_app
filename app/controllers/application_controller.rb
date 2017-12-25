@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   PERMISSIBLE_ATTRIBUTES = %i(name organizer_flg avatar avatar_cache)
+  PERMISSIBLE_ATTRIBUTES_2 = %i(name avatar avatar_cache)
 
   def after_sign_in_path_for(resource)
     if current_user.sign_in_count == 1
@@ -21,5 +22,6 @@ class ApplicationController < ActionController::Base
   protected
     def configure_permitted_parameters
       devise_parameter_sanitizer.permit(:sign_up, keys: PERMISSIBLE_ATTRIBUTES)
+      devise_parameter_sanitizer.permit(:account_update, keys: PERMISSIBLE_ATTRIBUTES_2)
     end
 end

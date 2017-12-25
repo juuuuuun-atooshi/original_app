@@ -1,28 +1,40 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
-  # You should configure your model like this:
-  # devise :omniauthable, omniauth_providers: [:twitter]
+  def facebook
+    @user = User.find_for_facebook_oauth(request.env["omniauth.auth"], current_user)
 
-  # You should also create an action method in this controller like this:
-  # def twitter
-  # end
+    if @user.persisted?
+      set_flash_message(:notice, :success, kind: "Facebook") if is_navigational_format?
 
-  # More info at:
-  # https://github.com/plataformatec/devise#omniauth
+      @artist = Artist.find_by(user_id: @user.id)
+      @organizer = Organizer.find_by(user_id: @user.id)
+      unless @artist.blank? || @organizer.blank?
+        sign_in_and_redirect @user, event: :authentication
+      else
+        redirect_to edit_user_path(id: @user.id)
+      end
+    else
+      session["devise.facebook_data"] = request.env["omniauth.auth"]
+      redirect_to new_user_registration_url
+    end
+  end
 
-  # GET|POST /resource/auth/twitter
-  # def passthru
-  #   super
-  # end
+  def twitter
+    @user = User.find_for_twitter_oauth(request.env["omniauth.auth"], current_user)
 
-  # GET|POST /users/auth/twitter/callback
-  # def failure
-  #   super
-  # end
+    if @user.persisted?
+      set_flash_message(:notice, :success, kind: "Twitter") if is_navigational_format?
 
-  # protected
+      @artist = Artist.find_by(user_id: @user.id)
+      @organizer = Organizer.find_by(user_id: @user.id)
+      unless @artist.blank? || @organizer.blank?
+        sign_in_and_redirect @user, event: :authentication
+      else
+        redirect_to edit_user_path(id: @user.id)
+      end
+    else
+      session["devise.twitter_data"] = request.env["omniauth.auth"].except("extra")
+      redirect_to new_user_registration_url
+    end
+  end
 
-  # The path used when OmniAuth fails
-  # def after_omniauth_failure_path_for(scope)
-  #   super(scope)
-  # end
 end

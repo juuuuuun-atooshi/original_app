@@ -1,9 +1,27 @@
 class UsersController < ApplicationController
-  def create
+  before_action :set_user, only:[:edit, :update]
 
+  def create
+  end
+
+  def edit
+  end
+
+  def update
+    @user.update(organizer_flg: params[:user][:organizer_flg])
+
+    if @user.organizer_flg
+      redirect_to new_organizer_path
+    else
+      redirect_to new_artist_path
+    end
   end
 
   private
     def users_params
+    end
+
+    def set_user
+      @user = User.find(params[:id])
     end
 end
