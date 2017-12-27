@@ -7,10 +7,11 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
       @artist = Artist.find_by(user_id: @user.id)
       @organizer = Organizer.find_by(user_id: @user.id)
-      unless @artist.blank? || @organizer.blank?
+      unless @artist.blank? && @organizer.blank?
         sign_in_and_redirect @user, event: :authentication
       else
-        redirect_to edit_user_path(id: @user.id)
+        sign_in @user
+        redirect_to edit_user_path(@user, event: :authentication)
       end
     else
       session["devise.facebook_data"] = request.env["omniauth.auth"]
@@ -26,9 +27,10 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
       @artist = Artist.find_by(user_id: @user.id)
       @organizer = Organizer.find_by(user_id: @user.id)
-      unless @artist.blank? || @organizer.blank?
+      unless @artist.blank? && @organizer.blank?
         sign_in_and_redirect @user, event: :authentication
       else
+        sign_in @user
         redirect_to edit_user_path(id: @user.id)
       end
     else

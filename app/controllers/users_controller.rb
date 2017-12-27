@@ -9,11 +9,10 @@ class UsersController < ApplicationController
 
   def update
     @user.update(organizer_flg: params[:user][:organizer_flg])
-
     if @user.organizer_flg
-      redirect_to new_organizer_path
+      redirect_to new_organizer_path(user_id: @user.id, event:'sns')
     else
-      redirect_to new_artist_path
+      redirect_to new_artist_path(user_id: @user.id, event:'sns')
     end
   end
 

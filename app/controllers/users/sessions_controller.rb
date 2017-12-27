@@ -4,7 +4,6 @@ class Users::SessionsController < Devise::SessionsController
 
   # GET /resource/sign_in
   # def new
-  #   binding.pry
   #   super
   # end
 
@@ -21,7 +20,6 @@ class Users::SessionsController < Devise::SessionsController
   # protected
   # private
   #   def additional_task
-  #      binding.pry
   #   end
 
   # If you have extra params to permit, append them to the sanitizer.
