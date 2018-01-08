@@ -1,5 +1,7 @@
 class ReversenominationsController < ApplicationController
   def index
+    @organizer = Organizer.find_by(user_id: current_user.id)
+    @reversenominations = Reversenomination.where(organizer_id: @organizer.id)
   end
 
   def new
@@ -23,9 +25,11 @@ class ReversenominationsController < ApplicationController
 
   def create
     @reversenomination = Reversenomination.create(reversenomination_params)
+    @organizer = Organizer.find_by(user_id: current_user.id)
+    @reversenomination.organizer_id = @organizer.id
     @artsit = Artist.find(@reversenomination.artist_id)
     @conversation = Conversation.create!(sender_id:current_user.id, recipient_id:@artsit.user.id)
-    @message = @conversation.messages.build(body:"メッセージテスト送信", user_id: current_user.id)
+    @message = @conversation.messages.build(body:"逆指名対象イベント：#{event_url(@reversenomination.event_id)}", user_id: current_user.id)
 
     if @reversenomination.save && @conversation.save && @message.save
       redirect_to root_path, notice: '逆指名送信を完了しました！'

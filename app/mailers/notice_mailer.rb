@@ -36,4 +36,21 @@ class NoticeMailer < ApplicationMailer
     end
   end
 
+  def sendmail_event_info(events, user)
+    @events = events
+    @user = user
+    if @user.organizer_flg
+      @model = Organizer.find_by(user_id: @user.id)
+    else
+      @model = Artist.find_by(user_id: @user.id)
+    end
+
+    mail(
+      to: user.email,
+      subject: '新着イベントのお知らせ'
+    ) do |format|
+      format.html
+    end
+  end
+
 end

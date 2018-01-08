@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     post :search, on: :collection
     get :bygenre, on: :collection
     get :showlink, on: :collection
+    get :myevents, on: :collection
   end
 
   resources :artists do
@@ -41,7 +42,7 @@ Rails.application.routes.draw do
     patch :create, on: :collection
   end
 
-  resources :concerns, only:[:create, :destroy]
+  resources :follows, only:[:create, :destroy]
 
   resources :reversenominations do
     post :confirm, on: :collection

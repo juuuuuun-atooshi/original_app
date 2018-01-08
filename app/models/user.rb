@@ -7,11 +7,11 @@ class User < ActiveRecord::Base
   has_many :artist, dependent: :destroy
   has_many :organizer, dependent: :destroy
 
-  has_many :concerns, foreign_key:"follower_id", dependent: :destroy
-  has_many :reverse_concerns, foreign_key:"followed_id", class_name: "Concern", dependent: :destroy
+  has_many :follows, foreign_key:"follower_id", dependent: :destroy
+  has_many :reverse_follows, foreign_key:"followed_id", class_name: "Follow", dependent: :destroy
 
-  has_many :followed_users, through: :concerns, source: :followed
-  has_many :followers, through: :reverse_concerns, source: :follower
+  has_many :followed_users, through: :follows, source: :followed
+  has_many :followers, through: :reverse_follows, source: :follower
 
   mount_uploader :avatar, AvatarUploader
 
@@ -65,15 +65,15 @@ class User < ActiveRecord::Base
   end
 
   def follow!(other_user)
-    concerns.create!(followed_id: other_user.id)
+    follows.create!(followed_id: other_user.id)
   end
 
   def following?(other_user)
-    concerns.find_by(followed_id: other_user.id)
+    follows.find_by(followed_id: other_user.id)
   end
 
   def unfollow!(other_user)
-    concerns.find_by(followed_id: other_user.id).destroy
+    follows.find_by(followed_id: other_user.id).destroy
   end
 
 end

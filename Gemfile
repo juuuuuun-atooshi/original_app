@@ -94,3 +94,8 @@ gem 'gmaps4rails'
 gem "geocoder"
 
 gem 'kaminari'
+
+gem 'whenever', require: false
+
+gem 'nokogiri'
+gem 'premailer-rails'

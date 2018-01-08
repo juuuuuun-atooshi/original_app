@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171225104000) do
+ActiveRecord::Schema.define(version: 20180108053027) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,17 +29,6 @@ ActiveRecord::Schema.define(version: 20171225104000) do
     t.datetime "updated_at",                    null: false
     t.string   "avatar"
   end
-
-  create_table "concerns", force: :cascade do |t|
-    t.integer  "follower_id"
-    t.integer  "followed_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  add_index "concerns", ["followed_id"], name: "index_concerns_on_followed_id", using: :btree
-  add_index "concerns", ["follower_id", "followed_id"], name: "index_concerns_on_follower_id_and_followed_id", unique: true, using: :btree
-  add_index "concerns", ["follower_id"], name: "index_concerns_on_follower_id", using: :btree
 
   create_table "contacts", force: :cascade do |t|
     t.string   "name"
@@ -70,6 +59,17 @@ ActiveRecord::Schema.define(version: 20171225104000) do
     t.float    "longitude"
     t.string   "place"
   end
+
+  create_table "follows", force: :cascade do |t|
+    t.integer  "follower_id"
+    t.integer  "followed_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "follows", ["followed_id"], name: "index_follows_on_followed_id", using: :btree
+  add_index "follows", ["follower_id", "followed_id"], name: "index_follows_on_follower_id_and_followed_id", unique: true, using: :btree
+  add_index "follows", ["follower_id"], name: "index_follows_on_follower_id", using: :btree
 
   create_table "messages", force: :cascade do |t|
     t.text     "body"
@@ -126,6 +126,7 @@ ActiveRecord::Schema.define(version: 20171225104000) do
     t.integer "artist_id"
     t.integer "event_id"
     t.text    "privilege"
+    t.integer "organizer_id"
   end
 
   create_table "users", force: :cascade do |t|

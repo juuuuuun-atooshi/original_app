@@ -7,10 +7,10 @@ class Artist < ActiveRecord::Base
 
   enum genre: { ロック:"1", メタル:"2", ジャズ:"3", 弾き語り:"4", シンガー:"5"}
 
-  has_many :concerns, foreign_key:"follower_id", dependent: :destroy
-  has_many :reverse_concerns, foreign_key:"followed_id", class_name: "Concern", dependent: :destroy
+  has_many :follows, foreign_key:"follower_id", dependent: :destroy
+  has_many :reverse_follows, foreign_key:"followed_id", class_name: "Concern", dependent: :destroy
 
-  has_many :followed_users, through: :concerns, source: :followed
-  has_many :followers, through: :reverse_concerns, source: :follower
+  has_many :followed_users, through: :follows, source: :followed
+  has_many :followers, through: :reverse_follows, source: :follower
 
 end

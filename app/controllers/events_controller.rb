@@ -2,11 +2,16 @@ class EventsController < ApplicationController
   before_action :set_event, only:[:show, :edit, :update, :destroy, :showlink]
   before_action :authenticate_user!, except: [:index, :show, :searchinfo, :search]
 
-
   def index
     @events = Event.all.order(created_at: :desc)
     @events = Event.page(params[:page]).per(5)
     @artists = Artist.all.order(accsess_count: :desc).limit(5)
+  end
+
+  def myevents
+    @organizer = Organizer.find_by(user_id: current_user.id)
+    @events = Event.where(organizer_id: @organizer.id)
+    @events = @events.page(params[:page]).per(5)
   end
 
   def bygenre
@@ -109,7 +114,6 @@ class EventsController < ApplicationController
       format.html
       format.js { render :searchinfo }
     end
-
   end
 
   private
