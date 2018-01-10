@@ -31,6 +31,7 @@
         <div class="menu_btn">
           <% if params[:id] == @loginUser.id.to_s %>
             <%= link_to 'マイページを編集する', edit_artist_path(@artist.id), id:'mypage_edit', class:'btn btn-default' %>
+            <%= link_to 'ユーザー情報を編集する', edit_user_registration_path(current_user.id), class:'btn btn-danger' %>
           <% end %>
           <% if current_user.organizer_flg %>
             <%= link_to '逆指名', root_path , class: 'btn btn-default btn-sm btn-success' %>

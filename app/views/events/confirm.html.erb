@@ -3,23 +3,22 @@
         <h3>以下の内容で、登録する。</h3>
 
         <%= form_for(@event) do |f| %>
+          <%= f.hidden_field :title %>
+          <%= f.hidden_field :date %>
+          <%= f.hidden_field :content %>
+          <%= f.hidden_field :genre %>
+          <%= f.hidden_field :image %>
+          <%= f.hidden_field :image_cache %>
+          <%= f.hidden_field :address %>
+          <%= f.hidden_field :latitude %>
+          <%= f.hidden_field :longitude %>
 
-            <%= f.hidden_field :title %>
-            <%= f.hidden_field :date %>
-            <%= f.hidden_field :content %>
-            <%= f.hidden_field :genre %>
-            <%= f.hidden_field :image %>
-            <%= f.hidden_field :image_cache %>
-            <%= f.hidden_field :address %>
-            <%= f.hidden_field :latitude %>
-            <%= f.hidden_field :longitude %>
-
-            <p><%= photo_img(@event) %></p>
-            <p>イベントタイトル：<%= @event.title %></p>
-            <p>イベント開催日：<%= @event.date %></p>
-            <p>イベント内容：<%= simple_format(@event.content) %></p>
-            <p>こんなアーティストにオススメ：<%= @event.genre %></p>
-            <%= f.submit "登録",class: 'btn btn-primary btn-block'  %><br>
+          <p><%= photo_img(@event) %></p>
+          <p>イベントタイトル：<%= @event.title %></p>
+          <p>イベント開催日：<%= @event.date %></p>
+          <p>イベント内容：<%= simple_format(@event.content) %></p>
+          <p>こんなアーティストにオススメ：<%= @event.genre %></p>
+          <%= f.submit "登録",class: 'btn btn-primary btn-block'  %><br>
         <% end %>
 
         <%= form_for(@event, url: new_event_path, method:'get') do |f| %>

@@ -1,10 +1,10 @@
 module OrganizersHelper
   def choose_new_or_edit_organizer
-      if action_name == 'new' || action_name == 'confirm'
-          confirm_organizers_path
-      elsif action_name == 'edit'
-          organizer_path
-      end
+    if action_name == 'new' || action_name == 'confirm'
+        confirm_organizers_path
+    elsif action_name == 'edit'
+        organizer_path
+    end
   end
 
   def profile_img(organizer)

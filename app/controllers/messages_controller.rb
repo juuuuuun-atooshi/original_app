@@ -12,20 +12,15 @@ class MessagesController < ApplicationController
       # １０件越えフラグを有効にし、最新のメッセージ（１〜１０件）を取得
       @over_ten = true
       @messages = @messages[-10..-1]
-    end
-
-    # 上記以外の場合、１０件越えフラグを向こうにし、会話に紐づくメッセージを全て取得
-    if params[:m]
+    elsif params[:m]
       @over_ten = false
       @messages = @conversation.messages
     end
 
     # メッセージが最新の場合、以下の処理を行う
-    if @messages.last
-      # 最新メッセージのユーザが自ユーザでない場合、メッセージ既読フラグを有効にする
-      if @messages.last.user_id != current_user.id
+    # 最新メッセージのユーザが自ユーザでない場合、メッセージ既読フラグを有効にする
+    if @messages.last && @messages.last.user_id != current_user.id
         @messages.last.read = true
-      end
     end
 
     # 新規投稿のメッセージ用の変数を作成

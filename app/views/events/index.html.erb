@@ -35,8 +35,10 @@
             <div class="content_btn">
               <% if user_signed_in? %>
                 <% if current_user.organizer_flg? %>
-                  <%= link_to "編集", edit_event_path(event.id), class: 'btn btn-default btn-sm btn-success' %>
-                  <%= link_to "削除", event_path(event.id), method: :delete, data: { confirm: '本当に削除していいですか？'}, class: 'btn btn-default btn-sm btn btn-danger' %>
+                  <% if event.organizer.user_id == current_user.id  %>
+                    <%= link_to "編集", edit_event_path(event.id), class: 'btn btn-default btn-sm btn-success' %>
+                    <%= link_to "削除", event_path(event.id), method: :delete, data: { confirm: '本当に削除していいですか？'}, class: 'btn btn-default btn-sm btn btn-danger' %>
+                  <% end %>
                 <% else %>
                   <% if check_participant(event.id) == nil %>
                     <%= link_to "イベントに参加する", {controller:"events", action:"participation", id:event.id}, class: 'btn btn-danger' %>

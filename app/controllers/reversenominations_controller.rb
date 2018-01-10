@@ -8,7 +8,6 @@ class ReversenominationsController < ApplicationController
     @organizer = Organizer.find_by(user_id: current_user.id)
     @artist = Artist.find(params[:artist_id])
     @q = Event.ransack(params[:q])
-
   end
 
   def privilege
@@ -63,12 +62,10 @@ class ReversenominationsController < ApplicationController
       format.html { redirect_to searchinfo_reversenominations_path }
       format.js { render :searchinfo }
     end
-
   end
 
   private
     def reversenomination_params
       params.require(:reversenomination).permit(:artist_id, :event_id, :privilege)
     end
-
 end

@@ -4,8 +4,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
 
-  after_filter :store_location
-
   PERMISSIBLE_ATTRIBUTES = %i(name organizer_flg avatar avatar_cache)
   PERMISSIBLE_ATTRIBUTES_2 = %i(name avatar avatar_cache)
 
@@ -21,16 +19,13 @@ class ApplicationController < ActionController::Base
         new_organizer_path
       end
     else
-      root_path
-    end
-  end
-
-  def store_location
-    if (request.fullpath != "/users/sign_in" &&
-        request.fullpath != "/users/sign_up" &&
-        request.fullpath !~ Regexp.new("\\A/users/password.*\\z") &&
-        !request.xhr?) # don't store ajax calls
-      session[:previous_url] = request.fullpath
+      @artist = Artist.find_by(user_id: current_user.id)
+      @organizer = Organizer.find_by(user_id: current_user.id)
+      if @artist.blank? && @organizer.blank?
+        edit_user_path(current_user.id)
+      else
+        root_path
+      end
     end
   end
 
