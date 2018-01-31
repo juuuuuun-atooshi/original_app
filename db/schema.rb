@@ -24,9 +24,9 @@ ActiveRecord::Schema.define(version: 20180108053027) do
     t.string   "singing"
     t.string   "play_video"
     t.integer  "user_id"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
-    t.integer  "accsess_count"
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.integer  "accsess_count",     default: 0
     t.string   "avatar"
   end
 
