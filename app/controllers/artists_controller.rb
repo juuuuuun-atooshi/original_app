@@ -1,6 +1,6 @@
 class ArtistsController < ApplicationController
   before_action :set_artist, only:[:show, :edit, :update, :destroy]
-  # before_action :set_loginUser, only:[:index, :show, :edit, :update, :destroy]
+  before_action :set_loginUser, only:[:index, :show, :edit, :update, :destroy]
 
   def index
     @followeds = current_user.followed_users
@@ -60,10 +60,12 @@ class ArtistsController < ApplicationController
     end
 
     def set_loginUser
-      if current_user.organizer_flg == true
-        @loginUser = Organizer.find_by(user_id: current_user.id)
-      else
-        @loginUser = Artist.find_by(user_id: current_user.id)
+      if user_signed_in?
+        if current_user.organizer_flg == true
+          @loginUser = Organizer.find_by(user_id: current_user.id)
+        else
+          @loginUser = Artist.find_by(user_id: current_user.id)
+        end
       end
     end
 
